@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socmed Aggregator</title>
+  </head>
+  <body>
+      <div id='searchDiv'>
+      </div>
+      <div id='postDiv'>
+            <table>
+                <form action="#">
+                    <tr>
+                        <th><input id="tweetBar" type="text" name="tweet" value="post"></th>
+                        <th><button id="postTweet">post !</button></th>
+                    </tr>
+                </form>
+            </table>
+        </div>
+      <div id='tweetDiv'>
+          <table id="tweet">
+              <tr>
+                  <th><h4>Id</h4></th>
+                  <th><h4>Tweet</h4></th>
+                  <th><h4>Date</h4></th>
+              </tr>
+          </table>
+      </div>
+      <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+      <script>
+          $.ajax({
+              url: 'http://localhost:3000/twitter',
+              method: 'GET',
+              success: function(tweets) {
+                tweets = JSON.parse(tweets)
+                tweets.forEach((tweet) => {
+                    temp = `
+                        <tr>
+                            <th><h5>${tweet.id}</h5></th>
+                            <th><h5>${tweet.text}</h5></th>
+                            <th><h5>${tweet.created_at}</h5></th>
+                        </tr>
+                        `;
+                    $('#tweet').append(temp);
+                })
+              }
+          });
+          $('#postTweet').ajax({
+              url: 'http://localhost:3000/twitter',
+              method: 'POST',
+              data: {tweet : $('#tweetBar').val()},
+              success: function(tweets) {
+                  console.log( $('#tweetBar'))
+                  console.log(tweets)
+              }
+          })
+      </script>
+  </body>
+</html>
