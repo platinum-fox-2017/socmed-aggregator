@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div id="timeline">
+
+    </div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+<script>
+    $.ajax({
+        url: "http://localhost:3000/",
+        dataType: 'json',
+        type: 'get',
+        success: (results) => {
+            results.map((result) => {
+                $("#timeline").append('<b>' + result.text + '</b><br/>');
+            })
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+</script>
+
+
+</html>
