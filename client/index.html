@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -57,7 +58,7 @@
         <!-- user-timeline -->
         <div class="panel panel-default panel-custom">
           <div class="panel-heading">
-            <h3 class="panel-title"><small><a href="#">MY</a></small> Timeline</h3>
+            <h3 class="panel-title">My Timeline</h3>
           </div>
           <div class="panel-body">
             <ul class="list-unstyled" id="tweet-user">
@@ -72,15 +73,15 @@
           <div class="panel-heading">
             <div class="media">
               <div class="media-body">
-                <div class="form-group has-feedback">
-                  <label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
-                  <input type="text" class="form-control" id="search2" aria-describedby="search">
+                <div class="col-sm-9">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="status" name="status">
+                  </div>
                 </div>
-                <!-- <button type="button" class="btn"></button> -->
+                <div class="col-sm-3">
+                  <button class="btn btn-primary" id="submit"><i class="fab fa-twitter"></i> Post</button>
+                </div>
               </div>
-              <a class="media-left" href="#fake">
-  							<i class="fas fa-save fa-2x"></i>
-  						</a>
             </div>
           </div>
           <div class="panel-body">
@@ -162,7 +163,7 @@
       type: 'GET',
       dataType: 'JSON',
       success: function(resp) {
-        console.log(resp);
+        // console.log(resp);
         resp.forEach(function(data) {
           $('#tweet-user').append(`<li><small>#${data.text}</small></li>`)
         })
@@ -170,6 +171,36 @@
       error: function(error) {
         console.error(error)
       }
+    })
+
+    $('#submit').click(function() {
+      $.ajax({
+        type: "POST",
+        url: `http://localhost:3000/api/twatts/newpost`,
+        data: {
+          status: $('#status').val()
+        },
+        success: function(resp) {
+          $('#status').val('')
+          $('#tweet-home').prepend(
+            `
+            <div class=\"media\">
+              <div class=\"media-body\">
+                <h4 class=\"media-heading\">${resp.user.name}</h4>
+                <p>${resp.text}</p>
+                <ul class=\"nav nav-pills nav-pills-custom\">
+                  <li><small><i class=\"fab fa-twitter\"></i> ${resp.user.screen_name}</small></li>
+                  <li><small><i class=\"fas fa-map-marker\"></i> ${resp.user.location}</small></li>
+                </ul>
+              </div>
+            </div>
+          `
+          )
+          swal("Nice Post!", resp.text, "success", {
+            button: "Aww yiss!",
+          })
+        },
+      });
     })
   </script>
 </body>
