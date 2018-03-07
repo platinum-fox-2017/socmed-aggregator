@@ -3,16 +3,37 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Twatts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 
 <body>
-    <div id="timeline">
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Welcome to Twatts
+            </h1>
+            <p class="subtitle">
+                My first Twitter Aggregator
+                <strong>Andrew</strong>!
+            </p>
+            <div class="field">
+                <label class="label">Status</label>
+                <div class="control">
+                    <input class="input" type="text" id="statusInput" placeholder="Text input">
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button id="submit" class="button is-link">Submit</button>
+                </div>
+            </div>
+            <br/>
 
-    </div>
-
+        </div>
+    </section>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -25,13 +46,43 @@
         type: 'get',
         success: (results) => {
             results.map((result) => {
-                $("#timeline").append('<b>' + result.text + '</b><br/>');
+                $(".section").append(
+                    `
+                <div class="box">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                ${result.text}
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            `
+                )
             })
         },
         error: function (err) {
             console.log(err);
         }
     });
+
+    $("#submit").click(() => {
+        $.ajax({
+            url: "http://localhost:3000/post",
+            type: "post",
+            data: {
+                stat: $("#statusInput").val()
+            },
+            success: (result) => {
+                $("#statusInput").val('')
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    })
 </script>
 
 
