@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SOCIAL MEDIA AGGREGATOR</title>
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+        </script>
+    </head>
+    <body>
+        <h1>TWATT</h1>
+        <h3>Post a tweet</h3>
+            <input id="tweet" type="text" placeholder="Post a tweet">
+            <input id="submit" type="submit" onclick="postTweet()">
+        <h3>Search a tweet</h3>
+            <input id="search" type="text" placeholder="Search a tweet">
+            <input id="submit" type="submit" onclick="searchTweet()">
+        <h3>Get twatt timeline</h3>
+            <input id="submit" type="submit" value="Get twatt timeline" onclick="getTimeLine()">
+        <ol class="333"></ol>
+        <ul class="222"></ul>
+    </body>
+    <footer>
+        <script>
+            function getTimeLine(){
+            $.ajax({
+                type:'GET',
+                url:'http://localhost:3000/twatt',
+                success: (res)=>{
+                    res.data.map((v,i,a)=>{
+                        $(".333").prepend(`<li>${v.created_at}................${v.text}</li>`);
+                    })
+                }
+            })
+            }
+            function postTweet() {
+                let dataInput = document.getElementById("tweet").value
+                $.ajax({
+                    type:'POST',
+                    url:'http://localhost:3000/twatt',
+                    data:{status: dataInput},
+                    success: (res)=>{
+                        $('.333').prepend(`<li>${res.data.created_at}................${res.data.text}</li>`);
+                        $('.333').val('')
+                    }
+                })
+            }
+            function searchTweet(){
+                // console.log(`IN BABY`)
+                let dataInput = document.getElementById("search").value
+                console.log(dataInput);
+                $.ajax({
+                  type:'post',
+                  url:'http://localhost:3000/twatt/search',
+                  data:{search: dataInput}, 
+                  success: (res)=>{
+                      res.data.statuses.forEach((v,i,a)=>{
+                        $(".222").prepend(`<li>${v.created_at}................${v.text}</li>`);
+                      })
+                  }
+                })
+            }
+        </script>
+    </footer>
+</html>

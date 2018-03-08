@@ -31,6 +31,7 @@ class Twatt_Controller{
             });
     }
     static post_a_tweet(req,res,next){
+      console.log(req.body)
         twatt.post(
             'https://api.twitter.com/1.1/statuses/update.json',
              user_token, //test user token 
