@@ -123,26 +123,30 @@
         $.ajax({
             url: "http://localhost:3000/search",
             type: "post",
+            dataType: 'json',
             data: {
                 keyword: $("#keyword").val()
             },
-            success: (result) => {
+            success: (results) => {
                 $("#keyword").val('')
-                $(".search").append(
-                    `
+                console.log(results.statuses)
+                results.statuses.map((data) => {
+                    $(".search").append(
+                        `
                 <div class="box">
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
                             <p>
-                                ${result.text}
+                                ${data.text}
                             </p>
                         </div>
                     </div>
                 </article>
             </div>
             `
-                )
+                    )
+                })
             },
             error: (err) => {
                 console.log(err)
