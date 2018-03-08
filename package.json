@@ -1,0 +1,19 @@
+{
+  "name": "socmed-aggregator",
+  "version": "1.0.0",
+  "description": "client server app for your social media with oAuth and Facebook login",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dennish8/socmed-aggregator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dennish8/socmed-aggregator/issues"
+  },
+  "homepage": "https://github.com/dennish8/socmed-aggregator#readme"
+}
