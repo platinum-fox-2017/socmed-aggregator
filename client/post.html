@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="./style/style_twatt.css">
-    <title>Twatter</title>
+    <title>Posting</title>
   </head>
   <body>
     <div class="header">
-      <h1>Welcome to Twatter</h1>
+      <h1>Posting</h1>
     </div>
     <div class="navigation">
       <a href="./index.html">
@@ -20,10 +20,16 @@
         <button type="button" name="button">post</button>
       </a>
     </div>
-    <div class="timeline" id="twitter">
-      <p>My Tweets</p>
+
+    <div class="post" id="twitter">
+      <p>Share your status here!</p>
+      <form id="tweet_form" action="index.html" method="post">
+        <input type="text" name="status" value="">
+        <button type="button" name="submit_button" id="submit_tweet">TWEET</button>
+      </form>
     </div>
-    <div class="timeline" id="facebook">
+
+    <div class="post" id="facebook">
 
     </div>
   </body>
@@ -31,5 +37,5 @@
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-  <script src="./lib/twatter.js" charset="utf-8"></script>
+  <script src="./lib/post.js" charset="utf-8"></script>
 </html>

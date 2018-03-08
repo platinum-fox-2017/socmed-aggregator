@@ -20,8 +20,15 @@
         <button type="button" name="button">post</button>
       </a>
     </div>
+    <div class="search" id="twitter">
+      <p>Search tweets</p>
+      <form id="tweet_form" action="index.html" method="post">
+        <input type="text" name="q" value="">
+        <button type="button" name="submit_button" id="search_tweet">Search</button>
+      </form>
+    </div>
     <div class="timeline" id="twitter">
-      <p>My Tweets</p>
+      <p>found tweets</p>
     </div>
     <div class="timeline" id="facebook">
 
@@ -31,5 +38,5 @@
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-  <script src="./lib/twatter.js" charset="utf-8"></script>
+  <script src="./lib/search.js" charset="utf-8"></script>
 </html>

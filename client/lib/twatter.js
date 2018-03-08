@@ -3,8 +3,8 @@ $.ajax({
   url: 'http://localhost:3000/oauth/timeline',
   success: function(resp) {
     resp.map((result) => {
-      $('.timeline').append(
-        `<div class="post">
+      $('#twitter').append(
+        `<div class="tweets">
           <article class="tweet">
             <p>
               ${result.text}
