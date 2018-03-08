@@ -31,7 +31,19 @@
                 </div>
             </div>
             <br/>
-
+            <div class="field">
+                <label class="label">Keyword</label>
+                <div class="control">
+                    <input class="input" type="text" id="keyword" placeholder="Text input">
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button id="submitKeyword" class="button is-link">Search Me</button>
+                </div>
+            </div>
+            <div class="search"></div>
+            <br/>
         </div>
     </section>
 </body>
@@ -45,14 +57,22 @@
         dataType: 'json',
         type: 'get',
         success: (results) => {
+            console.log(results)
             results.map((result) => {
                 $(".section").append(
                     `
                 <div class="box">
                 <article class="media">
+                    <div class="media-left">
+      <figure class="image is-48x48">
+        <img src="${result.user.profile_image_url}" alt="Image">
+      </figure>
+    </div>
                     <div class="media-content">
                         <div class="content">
                             <p>
+                                <strong>${result.user.name}</strong> <small>@${result.user.screen_name}</small> <small>31m</small>
+                                <br>
                                 ${result.text}
                             </p>
                         </div>
@@ -77,6 +97,52 @@
             },
             success: (result) => {
                 $("#statusInput").val('')
+                $(".section").append(
+                    `
+                <div class="box">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                ${result.text}
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            `
+                )
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    })
+
+    $("#submitKeyword").click(() => {
+        $.ajax({
+            url: "http://localhost:3000/search",
+            type: "post",
+            data: {
+                keyword: $("#keyword").val()
+            },
+            success: (result) => {
+                $("#keyword").val('')
+                $(".search").append(
+                    `
+                <div class="box">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                ${result.text}
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            `
+                )
             },
             error: (err) => {
                 console.log(err)
