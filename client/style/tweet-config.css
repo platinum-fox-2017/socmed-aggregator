@@ -1,0 +1,34 @@
+*{
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  .header {
+    height: 80px;
+    background-color: rgb(255, 192, 203);
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .showTimeline {
+    padding: 30px 30px 30px 30px;
+    justify-content: left;
+  }
+
+  .showProfile {
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    justify-content: left;
+  }
+
+  .searchTwit {
+    padding: 30px 30px 30px 30px;
+    justify-content: left;
+  }
+
+  .postTwit {
+    padding: 30px 30px 30px 30px;
+    justify-content: left;
+  }
