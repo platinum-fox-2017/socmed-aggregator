@@ -38,7 +38,7 @@ module.exports = {
 
   twattSearch: (req, res) => {
     Twitter.get(
-      'https://api.twitter.com/1.1/search/tweets.json?q=' + req.query.search,
+      'https://api.twitter.com/1.1/search/tweets.json?q=' + req.query.q,
       process.env.TOKEN_USERKEY, process.env.TOKEN_USERSECRET,
       (err, data, result) => {
         if (err) { res.status(400).send(JSON.parse(err.message)) }
