@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Twatter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  </head>
+<body>
+  <h1 id="header">Welcome to Twatt</h1>
+  <div class="field">
+      <label class="label">What's your Idea Today?</label>
+      <div class="control">
+        <input class="input" id="tweet" type="text" placeholder="Your Big Idea Today">
+      </div>
+      <button class="button is-primary" id="button-tweet">Tweet</button>
+  </div>
+  <div class="field">
+      <label class="label">What happen in the world?</label>
+      <div class="control">
+        <input class="input" id="search" type="text" placeholder="Today's headline is..">
+      </div>
+      <button class="button is-primary" id="button-search">Search</button>
+  </div>
+  <div class="newtimeline"></div>
+    <div class="timeline"><br></div>
+    <div class="search-list"><br></div>
+</body>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+    </script>
+    <script src="./script/timeline.js"></script>
+    <script src="./script/post.js"></script>
+    <script src="./script/search.js"></script>
+
+</html>
