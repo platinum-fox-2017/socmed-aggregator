@@ -39,7 +39,6 @@ module.exports = {
     },
 
     postTweet: (req, res) => {
-        console.log(req.body)
         myOauth.post(
             `https://api.twitter.com/1.1/statuses/update.json?status=${req.body.tweet}`,
             process.env.USER_TOKEN, //test user token 
