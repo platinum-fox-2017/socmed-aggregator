@@ -1,0 +1,53 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+.header {
+  height: 80px;
+  background-color: rgb(222, 222, 244);
+  padding: 10px 30px;;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigation {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+.navigation a {
+  margin: 0px 5px;
+}
+
+.timeline {
+  height: auto;
+  padding: 30px 30px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post {
+  height: 500px;
+  padding: 30px 30px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search {
+  height: 500px;
+  padding: 30px 30px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+article {
+  background-color: rgb(222, 222, 222);
+  width: 300px;
+  padding: 20px;
+  margin: 10px;
+}

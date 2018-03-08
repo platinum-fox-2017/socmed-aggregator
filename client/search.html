@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./style/style_twatt.css">
+    <title>Twatter</title>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Welcome to Twatter</h1>
+    </div>
+    <div class="navigation">
+      <a href="./index.html">
+        <button type="button" name="button">home</button>
+      </a>
+      <a href="./search.html">
+        <button type="button" name="button">search</button>
+      </a>
+      <a href="./post.html">
+        <button type="button" name="button">post</button>
+      </a>
+    </div>
+    <div class="search" id="twitter">
+      <p>Search tweets</p>
+      <form id="tweet_form" action="index.html" method="post">
+        <input type="text" name="q" value="">
+        <button type="button" name="submit_button" id="search_tweet">Search</button>
+      </form>
+    </div>
+    <div class="timeline" id="twitter">
+      <p>found tweets</p>
+    </div>
+    <div class="timeline" id="facebook">
+
+    </div>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="./lib/search.js" charset="utf-8"></script>
+</html>
