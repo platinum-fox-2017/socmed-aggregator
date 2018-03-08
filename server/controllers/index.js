@@ -24,8 +24,8 @@ module.exports = {
   update (req, res) {
     twatt.post(
       'https://api.twitter.com/1.1/statuses/update.json?',
-      process.env.ACCESSTOKEN, //test user token 
-      process.env.TOKENSECRET, //test user secret            
+      '90120636-IIh21DpksJqJdKyPQzXwOqisJjaRqIrj4fauYomOq', //test user token 
+      'Hkx0b3q40ZstDnQ4QIdK6XfUf6bQJ0bUzNjuXPJ9UnMiK', //test user secret        
       {status: req.body.status},
       function (e, data){
         if (e) console.error(e);
