@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socmed Aggregator</title>
+  <link rel="icon" type="image/png" href="img/logo_e.png">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+  <!-- top-bar -->
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-collapse navbar-collapse-1 collapse" aria-expanded="true">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#fake"><i class="fas fa-stopwatch"></i> Timeline</a></li>
+        </ul>
+        <div class="navbar-form navbar-right">
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control-nav" id="find" name="find">
+          </div>
+          <!-- <a class="btn" onclick="search()"><i class="fas fa-search"></i></a> -->
+          <button class="btn btn-xs btn-default" type="submit" onclick="search()">
+  					<i class="fas fa-search"></i>
+  				</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <!-- left-bar -->
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <img class="img-responsive" id="img-profile" alt="profile" src="http://placehold.it/800x500">
+            <div class="row">
+              <div class="col-xs-3">
+                <h5 id="user-tweets"><small>TWEETS</small><br>1,453</h5>
+              </div>
+              <div class="col-xs-4">
+                <h5 id="user-following"><small>FOLLOWING</small><br>2531</h5>
+              </div>
+              <div class="col-xs-5">
+                <h5 id="user-follower"><small>FOLLOWERS</small><br>153</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- user-timeline -->
+        <div class="panel panel-default panel-custom">
+          <div class="panel-heading">
+            <h3 class="panel-title">My Timeline</h3>
+          </div>
+          <div class="panel-body">
+            <ul class="list-unstyled" id="tweet-user"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <div class="media">
+              <div class="media-body">
+                <div class="col-sm-9">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="status" name="status">
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <button class="btn btn-primary" id="submit"><i class="fab fa-twitter"></i> Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div id="tweet-home"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- right-nav -->
+      <div class="col-sm-3">
+        <div class="panel panel-default panel-custom">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>I am always in...</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="media">
+              <div class="media-left"><i class="fab fa-linkedin fa-2x"></i></div>
+              <div class="media-body">
+                <h4 class="media-heading"><a href="https://www.linkedin.com/in/eko-santoso/">Linkedin</a></h4>
+              </div>
+            </div>
+            <div class="media">
+              <div class="media-left"><i class="fab fa-github-square fa-2x"></i></div>
+              <div class="media-body">
+                <h4 class="media-heading"><a href="https://github.com/eksant">Github</a></h4>
+              </div>
+            </div>
+            <div class="media">
+              <div class="media-left"><i class="fab fa-google-plus-square fa-2x"></i></div>
+              <div class="media-body">
+                <h4 class="media-heading"><a href="http://google.com/+EkoSantosoGPlus">Google+</a></h4>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <small><a href="mailto:eksant@gmail.com">eksant[at]gmail.com</a> &copy; 2018 soc-agg</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $.ajax({
+      url: `http://localhost:3000/api/twatts/timelinehome`,
+      type: 'GET',
+      dataType: 'JSON',
+      success: function(resp) {
+        $('#img-profile').attr('src', resp[0].user.profile_image_url)
+        $('#img-profile').attr('width', '200px')
+        $('#user-tweets').html(`<small>TWEETS</small><br>${resp[0].user.statuses_count}`)
+        $('#user-following').html(`<small>FOLLOWING</small><br>${resp[0].user.friends_count}`)
+        $('#user-follower').html(`<small>FOLLOWERS</small><br>${resp[0].user.followers_count}`)
+
+        resp.forEach(function(data) {
+          $('#tweet-home').append(
+            `
+            <div class=\"media\">
+              <div class=\"media-body\">
+                <h4 class=\"media-heading\">${data.user.name}</h4>
+                <p>${data.text}</p>
+                <ul class=\"nav nav-pills nav-pills-custom\">
+                  <li><small><i class=\"fab fa-twitter\"></i> ${data.user.screen_name}</small></li>
+                  <li><small><i class=\"fas fa-map-marker\"></i> ${data.user.location}</small></li>
+                </ul>
+              </div>
+            </div>
+          `
+          )
+        })
+      },
+      error: function(error) {
+        console.error(error)
+      }
+    })
+
+    $.ajax({
+      url: `http://localhost:3000/api/twatts/timelineuser`,
+      type: 'GET',
+      dataType: 'JSON',
+      success: function(resp) {
+        // console.log(resp);
+        resp.forEach(function(data) {
+          $('#tweet-user').append(`<li><small>#${data.text}</small></li>`)
+        })
+      },
+      error: function(error) {
+        console.error(error)
+      }
+    })
+
+    $('#submit').click(function() {
+      $.ajax({
+        type: "POST",
+        url: `http://localhost:3000/api/twatts/newpost`,
+        data: {
+          status: $('#status').val()
+        },
+        success: function(resp) {
+          $('#status').val('')
+          $('#tweet-home').prepend(
+            `
+            <div class=\"media\">
+              <div class=\"media-body\">
+                <h4 class=\"media-heading\">${resp.user.name}</h4>
+                <p>${resp.text}</p>
+                <ul class=\"nav nav-pills nav-pills-custom\">
+                  <li><small><i class=\"fab fa-twitter\"></i> ${resp.user.screen_name}</small></li>
+                  <li><small><i class=\"fas fa-map-marker\"></i> ${resp.user.location}</small></li>
+                </ul>
+              </div>
+            </div>
+          `
+          )
+          swal("Nice Post!", resp.text, "success", {
+            button: "Aww yiss!",
+          })
+        },
+      });
+    })
+
+    function search() {
+      let value = $('#find').val()
+
+      $.ajax({
+        type: "GET",
+        url: `http://localhost:3000/api/twatts/search?q=${value}`,
+        success: function(resp) {
+          // console.log(resp.statuses);
+          $('#search').val('')
+          resp.statuses.forEach(data => {
+            $('#tweet-home').prepend(
+              `
+              <div class=\"media\">
+                <div class=\"media-body\">
+                  <h4 class=\"media-heading\">${data.user.name}</h4>
+                  <p>${data.text}</p>
+                  <ul class=\"nav nav-pills nav-pills-custom\">
+                    <li><small><i class=\"fab fa-twitter\"></i> ${data.user.screen_name}</small></li>
+                    <li><small><i class=\"fas fa-map-marker\"></i> ${data.user.location}</small></li>
+                  </ul>
+                </div>
+              </div>
+            `
+            )
+          });
+          $('#tweet-home').prepend(
+            `
+              <div class=\"media\">
+                <div class=\"media-body\">
+                  <h4 class=\"media-heading\">Search: ${value}</h4>
+                </div>
+              </div>
+            `
+          )
+        },
+        error: function(error) {
+          console.error(error)
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
