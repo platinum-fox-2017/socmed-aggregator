@@ -38,7 +38,7 @@ module.exports = {
 
   ownTimeline(req, res){
     oauth.get(
-      'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=Werkbau&count=2',
+      'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=Werkbau&count=10',
       `${process.env.APPTOKEN}`, //test user token
       `${process.env.APPSECRET}`, //test user secret
       function (e, data, response){
@@ -60,9 +60,9 @@ module.exports = {
   },
 
   searchTwitter(req, res){
-    let query = req.query.q
+    let query = req.body.q
     oauth.get(
-      `https://api.twitter.com//1.1/search/tweets.json?q=`+ query,
+      `https://api.twitter.com//1.1/search/tweets.json?q=`+ query + '&count=10',
       `${process.env.APPTOKEN}`, //test user token
       `${process.env.APPSECRET}`, //test user secret
       function (e, data, response){
@@ -77,6 +77,7 @@ module.exports = {
           //   message: 'Twitter api call successful',
           //   data: dataJSON
           // })
+          console.log(dataJSON);
           res.status(200).send(dataJSON)
         }
 
@@ -84,12 +85,12 @@ module.exports = {
   },
 
   postTweet(req, res){
-    let tweet = req.query.status
+    let tweet = req.body.status
     oauth.post(
       `https://api.twitter.com/1.1/statuses/update.json?status=`+ tweet,
       `${process.env.APPTOKEN}`, //test user token
       `${process.env.APPSECRET}`, //test user secret]
-      req.query.tweet,
+      req.body.tweet,
       'tweet',
       function (e, data, response){
         if (e) {
@@ -108,5 +109,7 @@ module.exports = {
 
       });
   }
+
+
 
 }

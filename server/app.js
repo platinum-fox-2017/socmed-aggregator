@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 const path = require('path');
+const mongoose = require('mongoose')
 // const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -8,8 +9,10 @@ const bodyParser = require('body-parser');
 require('dotenv').config()
 const index = require('./routes/index');
 const oauth = require('./routes/oauth');
+const token = require('./routes/token')
 
 const app = express();
+mongoose.connect('mongodb://localhost:27017/socmed_aggregator')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/oauth', oauth);
+app.use('/api/fb', token);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
