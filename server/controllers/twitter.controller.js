@@ -27,7 +27,7 @@ module.exports = {
 
     seacrhTweet: (req, res) => {
         myOauth.get(
-            'https://api.twitter.com/1.1/search/tweets.json?q=' + req.body.keyword,
+            'https://api.twitter.com/1.1/search/tweets.json?q=' + req.params.keyword,
             process.env.USER_TOKEN, //test user token 
             process.env.USER_SECRET, //test user secret
             // {q: req.body.keyword},

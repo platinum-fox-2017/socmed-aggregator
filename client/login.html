@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="./style.css" type="text/css" rel="stylesheet">
+    <title>Socmed Aggregator</title>
+  </head>
+  <body>
+    <div>
+      <table id="status">
+        <tr id="statusLogout">
+          <th>
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+            </fb:login-button>
+          </th>
+          <th><p>Please login into this app</p></th> 
+        </tr>
+      </table>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+    <script src="./script.js"></script>
+    <script src="./facebook.js"></script>
+  </body>
+</html>

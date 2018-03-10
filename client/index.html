@@ -1,97 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="./style.css" type="text/css" rel="stylesheet">
     <title>Socmed Aggregator</title>
   </head>
   <body>
-        <div id='searchBarDiv'>
-            <input id="searchBar" text="text" name"keyword">
-            <button id="searchButton">Search</button>
-        </div>
-        <div id='postDiv'>
-            <table>
-                <form action="#">
-                    <tr>
-                        <th><input id="tweetBar" type="text" name="tweet" value="post"></th>
-                        <th><button id="postTweet">post !</button></th>
-                    </tr>
-                </form>
-            </table>
-        </div>
-        <div id='tweetDiv'>
-            <table id="tweet">
-                <tr>
-                    <th><h4>Id</h4></th>
-                    <th><h4>Tweet</h4></th>
-                    <th><h4>Date</h4></th>
-                </tr>
-            </table>
-        </div>
-        <div id='searchDiv'>
-            <table id='searchTable'>
-                <tr><th><h4>Search Result</h4></th></tr>
-            </table>
-        </div>
-      <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-      <script>
-            $.ajax({
-                url: 'http://localhost:3000/twitter',
-                method: 'GET',
-                success: function(tweets) {
-                    tweets = JSON.parse(tweets)
-                    tweets.forEach((tweet) => {
-                        temp = `
-                            <tr>
-                                <th><h5>${tweet.id}</h5></th>
-                                <th><h5>${tweet.text}</h5></th>
-                                <th><h5>${tweet.created_at}</h5></th>
-                            </tr>
-                            `;
-                        $('#tweet').append(temp);
-                    })
-                }
-            });
-            $('#postTweet').click(() => {
-                $.ajax({
-                    url: 'http://localhost:3000/twitter',
-                    method: 'POST',
-                    data: {tweet : $('#tweetBar').val()},
-                    success: function(tweets) {
-                        console.log( $('#tweetBar'))
-                        console.log(tweets)
-                    }
-                })
-            })
-            $('#searchButton').click(() => {
-                let tempBody = {
-                    keyword: $('#searchBar').val()
-                };
-                $.ajax({
-                    url: 'http://localhost:3000/twitter/search',
-                    method: 'POST',
-                    data: tempBody,
-                    success: function(searchRes) {
-                        searchRes = JSON.parse(searchRes)
-                        searchRes.statuses.forEach((tweet) => {
-                            let template =`
-                                    <div>
-                                        <div>
-                                            <p>${tweet.id}  ${tweet.created_at}</p>
-                                        </div>
-                                        <div>
-                                            <p>${tweet.text}</p>
-                                        </div>
-                                    </div>
-                                `;
-                            $('#searchDiv').append(template);
-                        })
-                  }
+    <div>
+      <table id="status">
+        <tr id="statusLogout">
+          <!-- <th>
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+            </fb:login-button>
+          </th>
+          <th><p>Please login into this app</p></th>  -->
+        </tr>
+        <tr id="statusLogin">
+          <th>Thanks for logging in!</th>
+          <th><button onclick="logout()">Logout</button></th>  
+        </tr>
+      </table>
+    </div>
+    <div id="headerBar">
+      <table>
+        <tr>
+          <th><button onclick="getTimeline()">My Timeline</button></th>
 
-              })
-          })
-      </script>
+            <form action="#">
+              <th><input id="tweetBar" type="text" name="tweet" value="post"></th>
+                <th><button id="postTweet">post !</button></th>
+            </form>
+
+            <form action="#">
+              <th><input id="searchBar" text="text" name"keyword"></th>
+              <th><button id="searchButton">Search</button></th>
+            </form>
+          </tr>
+        </table>
+      </div>
+
+      <div id='tweetDiv'>
+      </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+    <script src="./script.js"></script>
+    <script src="./facebook.js"></script>
+    <script>
+      getTimeline();
+    </script>
   </body>
 </html>
