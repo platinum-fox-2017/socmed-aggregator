@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var twitters = require('./routes/twitters');
+var facebook = require('./routes/facebook');
 const cors = require('cors');
 
 
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', users);
 app.use('/', index);
 app.use('/api', twitters);
+app.use('/api/facebook', facebook);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

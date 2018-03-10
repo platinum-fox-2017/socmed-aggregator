@@ -1,17 +1,12 @@
 $(document).ready(() => {
-  $.get('http://localhost:3000/api/timeline',(data,status) => {
-    if (status == 'success') {
-      timelines = JSON.parse(data);
-      timelines.forEach((timeline) => {
-        $('#timeline').append(`<li class="list-group-item"><h4>${timeline.user.name}</h4><p> ${timeline.text}</p></li>`);
-      })
-    }
-  });
-  $.post('http://localhost:3000/api/request-token',{},(data,status) => {
-    if (status == 'success') {
-      console.log(data);
-    }
-  })
+  // $.get('http://localhost:3000/api/timeline',(data,status) => {
+  //   if (status == 'success') {
+  //     timelines = JSON.parse(data);
+  //     timelines.forEach((timeline) => {
+  //       $('#timeline-twitter').append(`<li class="list-group-item"><h4>${timeline.user.name}</h4><p> ${timeline.text}</p></li>`);
+  //     })
+  //   }
+  // });
 });
 //post new Tweet
 $('#btn-status').click(() => {
@@ -19,7 +14,7 @@ $('#btn-status').click(() => {
   $.post('http://localhost:3000/api/tweet',{status: status},(data,status) => {
     if (status == 'success') {
       let timeline = JSON.parse(data);
-      $('#timeline').append(`<li class="list-group-item">${timeline.user.name} || ${timeline.text}</li>`);
+      $('#timeline-twitter').append(`<li class="list-group-item">${timeline.user.name} || ${timeline.text}</li>`);
     }
   })
 })
@@ -29,9 +24,9 @@ $('#btn-search').click(() => {
   $.get(`http://localhost:3000/api/search?q=${search}`,(data,status) => {
     if (status == 'success') {
       timelines = JSON.parse(data);
-      $('#timeline').empty();
+      $('#timeline-twitter').empty();
       timelines.statuses.forEach((timeline) => {
-        $('#timeline').append(`<li>${timeline.user.name} || ${timeline.text}</li>`);
+        $('#timeline-twitter').append(`<li>${timeline.user.name} || ${timeline.text}</li>`);
       })
     }
   })
@@ -42,7 +37,7 @@ $('#btn-refresh').click(() => {
     if (status == 'success') {
       timelines = JSON.parse(data);
       timelines.forEach((timeline) => {
-        $('#timeline').append(`<li class="list-group-item"><h4>${timeline.user.name}</h4><p> ${timeline.text}</p></li>`);
+        $('#timeline-twitter').append(`<li class="list-group-item"><h4>${timeline.user.name}</h4><p> ${timeline.text}</p></li>`);
       })
     }
   });

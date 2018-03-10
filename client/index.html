@@ -7,6 +7,7 @@
     <script src="/javascripts/jquery.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/javascripts/facebook.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-inverse">
@@ -26,6 +27,13 @@
      </div>
     </nav>
     <div class="container">
+      <fb:login-button
+        scope="public_profile,email"
+        onlogin="checkLoginState();"
+        id="fb-btn-login">
+      </fb:login-button>
+
+      <h4 id="text-login-as"></h4>
       <h1>Socmed Aggregator</h1>
       <button type="button" name="button" class="btn btn-success" id="btn-refresh">Refresh Timeline</button>
       <br><br>
@@ -33,12 +41,22 @@
         <div class="form-group">
           <input type="text" class="form-control" placeholder="New Post" name="status" value="" id="status">
         </div>
-        <button type="button" name="button"  class="btn btn-block btn-primary"id="btn-status">Post Tweet</button>
+        <button type="button" name="button"  class="btn btn-block btn-primary"id="btn-status">Post </button>
       </form>
       <br><br>
-      <ul id="timeline" class="list-group">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Twitter's Timeline</h4>
+          <ul id="timeline-twitter" class="list-group">
+        </div>
+        <div class="col-md-6">
+          <h4>Facebook's Timeline</h4>
+          <ul id="timeline-facebook" class="list-group">
+        </div>
+      </div>
       </ul>
     </div>
     <script src="/javascripts/twitter.js"></script>
+
   </body>
 </html>
