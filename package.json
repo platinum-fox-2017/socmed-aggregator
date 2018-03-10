@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/fadhilmch/socmed-aggregator/issues"
   },
-  "homepage": "https://github.com/fadhilmch/socmed-aggregator#readme"
+  "homepage": "https://github.com/fadhilmch/socmed-aggregator#readme",
+  "dependencies": {
+    "materialize-css": "^0.100.2"
+  }
 }
