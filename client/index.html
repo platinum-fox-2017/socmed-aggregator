@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./style/tweet-config.css">
+    <title>Tweets</title>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Welcome to Tweets</h1>
+    </div>
+    <div class="showProfile">
+      <p>Welcome</p>
+    </div>
+    <div class="showTimeline">
+      <button onclick="gettimeline()">get your timeline here</button>
+    </div>
+    <h5>SEARCH</h5>
+    <div class="searchTwit">
+      <input type="text" id="searchbody">
+      <button onclick="search()">search</button>
+    </div>
+    <h5>POST</h5>
+    <div class="postTwit">
+        <input type="text" id="searchpost">
+        <button onclick="post()">post</button>
+      </div>
+  </body>
+  
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="lib/profile.js" charset="utf-8"></script>
+</html>
