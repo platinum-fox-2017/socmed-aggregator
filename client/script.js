@@ -130,3 +130,7 @@ function postTweet(){
         loadTweets()
     })
 }
+
+setInterval(function () {
+    loadTweets();
+}, 300000);
