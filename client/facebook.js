@@ -1,12 +1,21 @@
 function statusChangeCallback(response) {
   console.log('statusChangeCallback');
   console.log(response);
-  if (response.status === 'connected' && localStorage.getItem('fbToken')) {
+  let path = window.location.pathname;  
+  if (response.status === 'connected') {
     localStorage.setItem('fbToken', response.authResponse.accessToken)
-    testAPI();
+    console.log(window.location.pathname)
+    if(path == '/login.html') {
+      window.location.href='./index.html'      
+    }
+    // console.log(window.location.url)
+    
+    // testAPI();
   } else {
     // $('#statusLogin').empty()
-    window.location.href='./login.html'
+    if(path !== '/login.html') {      
+      window.location.href='./login.html'
+    }
   }
 }
 
@@ -40,7 +49,7 @@ window.fbAsyncInit = function() {
 function testAPI() {
   console.log('Welcome!  Fetching your information.... ');
   FB.api('/me', function(response) {
-    // console.log('Successful login for: ' + response.name);
+    console.log('Successful login for: ' + response.name);
     // window.location.href='./index.html'
     // let template =`
     //               <th>Thanks for logging in, ${response.name}!</th>
