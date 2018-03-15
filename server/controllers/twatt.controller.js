@@ -92,5 +92,13 @@ module.exports = {
                 })
             }
         );
+    },
+
+    loginFacebook(req, res) {
+        let idFB = req.body.idFB;
+        let email = req.body.email;
+        let fbToken = req.body.fbToken;
+
+
     }
 }
