@@ -1,11 +1,20 @@
 loadTweets();
 
+// window.location.href = 'login.html'
+
+
 function loadTweets() {
     $('#tweet').empty();
     $.ajax({
         method: "GET",
         url: "http://localhost:3000/twatt/home",
-        dataType: "JSON"
+        dataType: "JSON",
+        headers: {
+          token:localStorage.token
+        },
+        error: function() {
+          window.location.href = 'login.html';
+        }
     })
     .done(function(data) {
         console.log(data);
@@ -53,7 +62,13 @@ function searchTweet(){
     $.ajax({
         method: "GET",
         url: `http://localhost:3000/twatt/search?q=${$('#search').val()}`,
-        dataType: "JSON"
+        dataType: "JSON",
+        headers: {
+          token:localStorage.token
+        },
+        error: function() {
+          window.location.href = 'login.html';
+        }
     })
     .done(function(data) {
         console.log(data);
@@ -87,7 +102,13 @@ function loadUserTweets() {
     $.ajax({
         method: "GET",
         url: "http://localhost:3000/twatt/fadhilmch",
-        dataType: "JSON"
+        dataType: "JSON",
+        headers: {
+          token:localStorage.token
+        },
+        error: function() {
+          window.location.href = 'login.html';
+        }
     })
     .done(function(data) {
         console.log(data);
@@ -122,6 +143,12 @@ function postTweet(){
         url: `http://localhost:3000/twatt/post?status=${$('#status').val()}`,
         data: {
             update : $('#status').val()
+        },
+        headers: {
+          token:localStorage.token
+        },
+        error: function() {
+          window.location.href = 'login.html';
         }
     })
     .done(function(data) {
