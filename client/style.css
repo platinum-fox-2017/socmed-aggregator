@@ -1,0 +1,13 @@
+.tweet {
+    background-color: #c0deed;
+    margin: 3px;
+    transition: 1s;
+}
+
+.tweet:hover { 
+    background-color: #80c1ff;
+}
+
+p {
+    margin: auto;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="./style.css" type="text/css" rel="stylesheet">
+    <title>Socmed Aggregator</title>
+  </head>
+  <body>
+    <div>
+      <table id="status">
+        <tr id="statusLogout">
+          <!-- <th>
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+            </fb:login-button>
+          </th>
+          <th><p>Please login into this app</p></th>  -->
+        </tr>
+        <tr id="statusLogin">
+          <th>Thanks for logging in!</th>
+          <th><button onclick="logout()">Logout</button></th>  
+        </tr>
+      </table>
+    </div>
+    <div id="headerBar">
+      <table>
+        <tr>
+          <th><button onclick="getTimeline()">My Timeline</button></th>
+
+            <form action="#">
+              <th><input id="tweetBar" type="text" name="tweet" value="post"></th>
+                <th><button id="postTweet">post !</button></th>
+            </form>
+
+            <form action="#">
+              <th><input id="searchBar" text="text" name"keyword"></th>
+              <th><button id="searchButton">Search</button></th>
+            </form>
+          </tr>
+        </table>
+      </div>
+
+      <div id='tweetDiv'>
+      </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+    <script src="./script.js"></script>
+    <script src="./facebook.js"></script>
+    <script>
+      getTimeline();
+    </script>
+  </body>
+</html>
